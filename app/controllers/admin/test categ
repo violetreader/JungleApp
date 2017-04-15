@@ -1,0 +1,11 @@
+class Admin::CategoriesController < ApplicationController
+
+  def index
+    @categories = Categories.order(id: :desc).all
+  end
+
+  def new
+    @categories = Categories.new
+  end
+
+end
