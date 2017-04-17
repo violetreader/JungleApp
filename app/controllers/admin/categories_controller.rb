@@ -18,6 +18,7 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
+# code below is not being used... use if you want to show all products for 1 category
   def show
     @category = Category.find(params[:id])
   end
