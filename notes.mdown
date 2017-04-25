@@ -1,0 +1,2 @@
+Use Credit Card # 4242 4242 4242 4242 for testing success scenarios.
+	- any future month and year for the expiration, any three-digit number for the CVC, and any random postal code.

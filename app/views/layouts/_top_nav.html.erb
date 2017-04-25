@@ -44,11 +44,13 @@
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
-        <% if session[:user_id] %>
-        <li ><%= link_to 'Logout', session_path(session[:user_id]) %>
+        <% if current_user %>
+        <!-- pass in the data you want to delete w your path -->
+        <li ><%= link_to 'Logout', session_path(session[:user_id]), method: :delete %>
         </li>
         <% else %>
         <li ><%= link_to'Login', :sessions %>
+        <!-- only 1 method in users controller so code will work below -->
         <li ><%= link_to 'Register', :users %>
         </li>
         <% end %>

@@ -1,12 +1,16 @@
 class SessionsController < ApplicationController
 
+  def show
+  end
+
 	def create
 	# searching db to see if session email matches any
-    @session = User.find_by(email: params[:email])
+  # (email: params[:email])
+    user = User.find_by_email(params[:email])
 
-    if @session && session.authenticate(params[:password])
-      session[:user_id] = @session.id
-      redirect_to :root, notice: 'Welcome Back!'
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect_to :root
     else
       redirect_to :sessions
     end
@@ -14,7 +18,7 @@ class SessionsController < ApplicationController
 
 	def destroy
     session[:user_id] = nil
-    redirect_to :index
+    redirect_to :root
 	end
 
 end

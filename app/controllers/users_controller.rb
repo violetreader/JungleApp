@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
 
-  def create
-    @user = User.new(user_params)
-    @emailMatch = User.find_by(email: params[:email])
+  def show
+    @user = User.new
+  end
 
-    if !@emailMatch
-      @user.save
-      session[:user_id] = @user.id
+  def create
+    user = User.new(user_params)
+# not working below
+    # emailMatch = User.find_by(email: params[:email])
+
+    if user.save
+      session[:user_id] = user.id
       redirect_to :root, notice: 'New user created!'
     else
       render :index
