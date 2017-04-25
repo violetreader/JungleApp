@@ -1,0 +1,31 @@
+
+
+<% if product = Product.find_by(id: order) %>
+
+
+  <tr>
+    <td>
+      <%= image_tag product.image.tiny %>
+    </td>
+    <td>
+      <h4><%= product.name %></h4>
+      <br>
+      <p><%= product.description %></p>
+    </td>
+    <td>
+      <%= product.price %>
+    </td>
+    <td>
+      <%= link_to remove_item_cart_path(id: order), class: 'btn btn-xs btn-danger', method: :delete do %>
+        -
+      <% end %>
+ 
+      <%= link_to add_item_cart_path(id: order), class: 'btn btn-xs btn-success', method: :put do %>
+        +
+      <% end %>
+    </td>
+    <td>
+
+    </td>
+  </tr>
+<% end %>
