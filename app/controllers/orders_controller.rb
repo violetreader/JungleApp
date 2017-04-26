@@ -1,8 +1,20 @@
 class OrdersController < ApplicationController
 
   def show
+    p "params id: ", params[:id]
+# params[:id] is the ORDER # in the params ( which will always be the new id for a new order)
     @order = Order.find(params[:id])
-    @thisOrder = @order.product.where(order_id: @order)
+    # p "thisis variable order: ", @order
+    p "this is ordder.line items:", @order.line_items
+    @order_total = 0
+    p "inject method: ", @order.line_items.each { |line_item| @order_total += line_item.total_price_cents  }
+    p "order total is: >>>", @order_total
+# initial value goes im value ("here")
+    p "The other orde total is >>>>>>>", @order.line_items.reduce(0) { |sum, line_item| sum + line_item.total_price_cents}
+    # @order_total = @order.line_items.reduce(() => {
+
+    #   })
+    
   end
 
   def create

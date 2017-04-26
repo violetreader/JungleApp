@@ -7,4 +7,8 @@ class Order < ActiveRecord::Base
 
   validates :stripe_charge_id, presence: true
 
+ 	def calc_total
+ 		@quantity = Line_items.sel()
+	end
+
 end
