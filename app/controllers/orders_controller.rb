@@ -1,7 +1,21 @@
 class OrdersController < ApplicationController
 
   def show
+    p "params id: ", params[:id]
+# params[:id] is the ORDER # in the params ( which will always be the new id for a new order)
     @order = Order.find(params[:id])
+    # p "thisis variable order: ", @order
+    p "this is ordder.line items:", @order.line_items
+    p 'What is going on ??'
+    @order_total = 0
+    @quantity_total = 0
+    p "inject method: ", @order.line_items.each { |line_item| @order_total += line_item.total_price_cents  }
+    p "order total is: >>>", @order_total
+# initial value goes im value like   array.reduce("here")
+# sum saves the value in loop for the next iteration, adds next value to it
+    p "The other orde total is >>>>>>>", @order.line_items.reduce(0) { |sum, line_item| sum + line_item.total_price_cents}
+    @order.line_items.reduce(@quantity_total) { |sum, quantity| @quantity_total = sum + quantity.quantity }
+    p "this is quantity total ------->", @quantity_total
   end
 
   def create
