@@ -29,5 +29,7 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 
 
 
-
 : === symbol in ruby (use instead of dot notation for obj as well)
+
+https://github.com/sumeetminhas/jungle-rails
+
