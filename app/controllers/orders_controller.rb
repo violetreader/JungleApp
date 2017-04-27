@@ -1,19 +1,16 @@
 class OrdersController < ApplicationController
 
   def show
-    p "params id: ", params[:id]
 # params[:id] is the ORDER # in the params ( which will always be the new id for a new order)
+    order = Order.find(params[:id])
     @order = Order.find(params[:id])
-    # p "thisis variable order: ", @order
-    p "this is ordder.line items:", @order.line_items
     @order_total = 0
-    p "inject method: ", @order.line_items.each { |line_item| @order_total += line_item.total_price_cents  }
-    # p "order total is: >>>", @order_total
+    order.line_items.each { |line_item| @order_total += line_item.total_price_cents  }
+# .round(2)
+
 # initial value goes im value like   array.reduce("here")
 # sum saves the value in loop for the next iteration, adds next value to it
-    p "The other orde total is >>>>>>>", @order.line_items.reduce(0) { |sum, line_item| sum + line_item.total_price_cents}
-    # @order.line_items.reduce(@quantity_total) { |sum, quantity| @quantity_total = sum + quantity.quantity }
-
+    p "The other orde total is >>>>>>>", order.line_items.reduce(0) { |sum, line_item| sum + line_item.total_price_cents}
   end
 
   def create
@@ -22,6 +19,7 @@ class OrdersController < ApplicationController
 
     if order.valid?
       empty_cart!
+      EmailReceipt.mailer(order).deliver_now
       redirect_to order, notice: 'Your Order has been placed.'
     else
       redirect_to cart_path, error: order.errors.full_messages.first
