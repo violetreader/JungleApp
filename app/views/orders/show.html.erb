@@ -14,15 +14,16 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th colspan="2">Item</th>
+          <th colspan="2">Product</th>
           <th>Description</th>
           <th>Quantity</th>
-          <th>Price</th>
+          <th>Price per Product</th>
         </tr>
       </thead>
       <tbody>
 <!-- line_items is auto connecting order.id to the order_id in its own table. Then printing out each 1? -->
         <% @order.line_items.each do |line_item, details| %>
+        <% @quantity_total = line_item.quantity %>
        	  <%= puts "this is itttt: ", line_item.id %>
           <%= render 'item', order: line_item %>
         <% end %>
@@ -33,7 +34,7 @@
             TOTAL:
           </th>
           <th>
-            <%= @order_total / 100 %>
+            <%= number_to_currency(@order_total / 100, :unit=> "$") %>
           </th>
         </tr>
       </tfoot>

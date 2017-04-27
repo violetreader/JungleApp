@@ -1,7 +1,4 @@
-
-
 <% if product = Product.find_by(id: order.product_id) %>
- 
 
     <tr>
       <td>
@@ -13,9 +10,11 @@
       <td>
         <p><%= product.description %></p>
       </td>
-      <td>
-        <%= @quantity_total %>
-      </td>
+
+        <td>
+          <%= @quantity_total %>
+        </td>
+
       <td>
         <%= product.price %>
       </td>
