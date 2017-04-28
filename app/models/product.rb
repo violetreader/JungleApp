@@ -11,4 +11,7 @@ class Product < ActiveRecord::Base
   validates :category, presence: true
   validates :image, presence: true
 
+  def sold_out?
+  	self.quantity == 0
+  end
 end
