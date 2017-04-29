@@ -22,6 +22,36 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+
+          <dt>Ratings</dt>
+          <dd><%= @AveRates %></dd> 
+
+          <dt>Reviews</dt>
+          <% if (@product.reviews) %>
+            <% @reviews.reverse.each do |review| %>
+              <dd><%= review.description %></dd>
+
+              <% if (session[:user_id] === review.user_id) %>
+                <%= link_to review_path(review), class: 'review', method: :delete do %>
+                  -
+                <% end %>
+              <% end %> 
+
+            <% end %>
+          <% end %>
+
+          <% if (session[:user_id]) %>
+            <%= form_for ([@product, @review]) do |form| %>
+              <br>
+              <%= form.label :rate_this! %>
+              <br>
+              <p><%= form.select :rating, (0..5) %></p>
+              <%= form.label :Make_a_Review %>
+              <p><%= form.text_field :description %></p>
+              <%= form.submit "Submit", class: "btn" %>
+            <% end %>
+          <% end %>
+
         </dl>
       </div>
     </div>
